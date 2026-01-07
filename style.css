@@ -1,0 +1,173 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background: #f4f4f4;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.3s;
+}
+
+/* 🌙 Toggle */
+.theme-toggle {
+  position: fixed;
+  top: 15px;
+  right: 15px;
+  font-size: 22px;
+  padding: 10px;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 999;
+}
+
+/* Calculator */
+.calculator {
+  width: 320px;
+  background: #fff;
+  padding: 15px;
+  border-radius: 15px;
+  position: relative;
+  animation: fadeIn 0.5s ease;
+}
+
+/* Neon Border */
+.calculator::before {
+  content: "";
+  position: absolute;
+  inset: -3px;
+  background: linear-gradient(45deg,
+    #ff00ff, #00ffff, #00ff6a, #ffcc00, #ff006a);
+  background-size: 400%;
+  animation: neon 6s linear infinite;
+  filter: blur(14px);
+  z-index: -1;
+}
+
+@keyframes neon {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes fadeIn {
+  from {opacity:0; transform:scale(0.95);}
+  to {opacity:1; transform:scale(1);}
+}
+
+#display {
+  width: 100%;
+  height: 60px;
+  font-size: 24px;
+  padding: 10px;
+  text-align: right;
+  border-radius: 8px;
+  border: none;
+  background: #eee;
+  margin-bottom: 10px;
+}
+
+.buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+button {
+  padding: 15px;
+  font-size: 20px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: 0.3s;
+}
+
+/* Hover Neon */
+button:hover {
+  box-shadow:
+    0 0 10px #00ffff,
+    0 0 20px #ff00ff,
+    0 0 30px #00ff6a;
+}
+
+/* Ripple Effect */
+button::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 10px;
+  height: 10px;
+  background: rgba(255,255,255,0.6);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+}
+
+button:active::after {
+  animation: ripple 0.6s ease-out;
+}
+
+@keyframes ripple {
+  from {width:10px;height:10px;opacity:0.8;}
+  to {width:300px;height:300px;opacity:0;}
+}
+
+.zero {
+  grid-column: span 2;
+}
+
+.equals {
+  background: #4caf50;
+  color: #fff;
+}
+
+.history {
+  margin-top: 15px;
+}
+
+.history ul {
+  max-height: 100px;
+  overflow-y: auto;
+  list-style: none;
+  font-size: 14px;
+}
+
+.clear-history {
+  width: 100%;
+  background: crimson;
+  color: #fff;
+  margin-top: 5px;
+}
+
+/* 🌙 DARK MODE */
+body.dark {
+  background: #121212;
+}
+
+body.dark .calculator {
+  background: #1e1e1e;
+  color: #fff;
+}
+
+body.dark #display {
+  background: #333;
+  color: #fff;
+}
+
+body.dark button {
+  background: #333;
+  color: #fff;
+}
+
+body.dark .calculator::before {
+  filter: blur(20px);
+}
